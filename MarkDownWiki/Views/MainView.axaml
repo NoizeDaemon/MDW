@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:mcontrol="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+		     xmlns:dialog="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+		     xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:vm="clr-namespace:MarkDownWiki.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MarkDownWiki.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+	<dialog:DialogHost Identifier="MainDialogHost" CloseOnClickAway="True" OverlayBackground="Black">
+		<dialog:DialogHost.DataTemplates>
+
+		</dialog:DialogHost.DataTemplates>
+		<TransitioningContentControl Content="{Binding CurrentPage}">
+			<TransitioningContentControl.PageTransition>
+				<CrossFade Duration="0:00:01.500" />
+			</TransitioningContentControl.PageTransition>
+		</TransitioningContentControl>
+	</dialog:DialogHost>
+</UserControl>
