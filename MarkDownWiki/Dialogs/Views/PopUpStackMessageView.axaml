@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		     xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+			 xmlns:mcontrol="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+			 xmlns:dmodels="using:MarkDownWiki.Dialogs.Models"
+			 xmlns:dvm="using:MarkDownWiki.Dialogs.ViewModels"
+             xmlns:dialogs="using:MarkDownWiki.Dialogs"	
+			 xmlns:local="using:MarkDownWiki"
+             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="40"
+             x:Class="MarkDownWiki.Dialogs.Views.PopUpStackMessageView"
+			 x:DataType="dvm:PopUpStackMessageViewModel">
+	<Grid ColumnDefinitions="*, Auto, Auto">
+		<Grid.Styles>
+			<Style Selector="ProgressBar[IsVisible=True]">
+				<!--<Setter Property="Transitions">
+					<Transitions>
+						<DoubleTransition
+                              Property="(local:ProgressBarWorkaround.Value)"
+                              Duration="0:0:0.1"/>
+					</Transitions>
+				</Setter>-->
+				<Style.Animations>
+					<Animation Duration="0:0:5">
+						<KeyFrame Cue="0%">
+							<Setter Property="(local:ProgressBarWorkaround.Value)" Value="100.0"/>
+						</KeyFrame>
+						<KeyFrame Cue="100%">
+							<Setter Property="(local:ProgressBarWorkaround.Value)" Value="0.0"/>
+						</KeyFrame>
+					</Animation>
+				</Style.Animations>
+			</Style>
+		</Grid.Styles>
+		<TextBlock Grid.Column="0" Margin="10" VerticalAlignment="Center"
+				   Classes="Body1" Text="{Binding Message.Text, FallbackValue=This is a message!}" />
+		<!--<icons:MaterialIcon Grid.Column="1" Kind="{Binding Icon, Converter={StaticResource IconConverter}, Mode=OneWay}" />-->
+		<icons:MaterialIcon Grid.Column="1" Width="30" Height="30" Margin="5"
+							Kind="{Binding Message.Icon, FallbackValue=InformationBoxOutline}" />
+		<ProgressBar Name="RemainingTimeProgressBar" Classes="no-transitions" Grid.Column="2" Orientation="Vertical" Background="{DynamicResource MaterialBackgroundBrush}">
+		</ProgressBar>
+	</Grid>
+</UserControl>

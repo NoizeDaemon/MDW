@@ -1,11 +1,11 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
 			 xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
 			 xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-			 xmlns:dialog="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+			 xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
 			 xmlns:local="using:MarkDownWiki"
              x:Class="MarkDownWiki.App">
+			 <!--xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"-->
 	<!--RequestedThemeVariant="Default">-->
 	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -17,10 +17,10 @@
 	<Application.Styles>
 		<FluentTheme />
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
-		<themes:MaterialThemeBase />
+		<themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Red" SecondaryColor="DeepPurple" />
 		<icons:MaterialIconStyles />
-		<styles:MaterialToolKit />
+		<!--<styles:MaterialToolKit />-->
 		<!--<StyleInclude Source="avares://Material.Styles/Resources/Compatibility/Index.axaml"/>-->
-		<dialog:DialogHostStyles />
+		<dialogHost:DialogHostStyles />
 	</Application.Styles>
 </Application>

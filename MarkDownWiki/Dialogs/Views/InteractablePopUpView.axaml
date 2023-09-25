@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:mcontrol="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+			 xmlns:dmodels="using:MarkDownWiki.Dialogs.Models"
+			 xmlns:dvm="using:MarkDownWiki.Dialogs.ViewModels"
+             xmlns:dialogs="using:MarkDownWiki.Dialogs"			 
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MarkDownWiki.Dialogs.Views.InteractablePopUpView"
+			 x:DataType="dvm:InteractablePopUpViewModel">
+	<UserControl.DataTemplates>
+		<DataTemplate x:DataType="dmodels:PopUpContent">
+			<mcontrol:Card>
+				<Grid RowDefinitions="Auto,*,Auto">
+					<TextBlock Name="PopUpTitle" Grid.Row="0" Text="{Binding Title}"
+							   IsVisible="{Binding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+					<TextBlock Name="PopUpMessage" Grid.Row="1" Text="{Binding Message}" />
+					<ItemsRepeater Name="PopUpInteractables" ItemsSource="{Binding Interactables}">
+						<ItemsRepeater.Layout>
+							<StackLayout Orientation="Horizontal" Spacing="10" />
+						</ItemsRepeater.Layout>
+						<ItemsRepeater.ItemTemplate>
+							<DataTemplate x:DataType="dialogs:Interactable">
+								<Button Content="{Binding Label}" />
+							</DataTemplate>
+						</ItemsRepeater.ItemTemplate>
+					</ItemsRepeater>
+				</Grid>
+			</mcontrol:Card>
+		</DataTemplate>
+	</UserControl.DataTemplates>
+</UserControl>

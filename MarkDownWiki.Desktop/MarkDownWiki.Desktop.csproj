@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AsyncAwaitBestPractices" Version="6.0.6" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.4" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.4" />
     <PackageReference Include="DialogHost.Avalonia" Version="0.7.7" />

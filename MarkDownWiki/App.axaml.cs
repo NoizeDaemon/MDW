@@ -17,7 +17,7 @@ public partial class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         //Themes.Change(Settings.Default.IsDarkMode, Color.FromUInt32(Settings.Default.PrimaryColor), );
-        Themes.Change(isDarkMode: true, Themes.LookUp(Material.Colors.PrimaryColor.LightBlue), Themes.LookUp(Material.Colors.SecondaryColor.DeepPurple));
+        Themes.Change(isDarkMode: true, Themes.LookUp(Material.Colors.PrimaryColor.Red), Themes.LookUp(Material.Colors.SecondaryColor.DeepPurple));
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
