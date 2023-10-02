@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:mcontrol="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"			 
 			 xmlns:vm="using:MarkDownWiki.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MarkDownWiki.Views.WelcomeView"
@@ -30,5 +31,8 @@
 		<Button PointerPressed="OnBrushButtonPointerPressed" Tag="MaterialPaperBrush" Background="{DynamicResource MaterialPaperBrush}" />
 		<Button PointerPressed="OnBrushButtonPointerPressed" Tag="SecondaryHueMidBrush" Background="{DynamicResource SecondaryHueMidBrush}" />
 		<Button PointerPressed="OnBrushButtonPointerPressed" Tag="MaterialSecondaryMidBrush" Background="{DynamicResource MaterialSecondaryMidBrush}" />
+		<mcontrol:Card Padding="0" Width="50"> 
+			<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Test" />
+		</mcontrol:Card>
 	</StackPanel>
 </UserControl>

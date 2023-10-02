@@ -3,9 +3,9 @@
 			 xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
 			 xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
 			 xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+			 xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
 			 xmlns:local="using:MarkDownWiki"
              x:Class="MarkDownWiki.App">
-			 <!--xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"-->
 	<!--RequestedThemeVariant="Default">-->
 	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -19,8 +19,9 @@
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
 		<themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Red" SecondaryColor="DeepPurple" />
 		<icons:MaterialIconStyles />
-		<!--<styles:MaterialToolKit />-->
 		<!--<StyleInclude Source="avares://Material.Styles/Resources/Compatibility/Index.axaml"/>-->
+		<styles:MaterialToolKit />
+		<StyleInclude Source="/Dialogs/Controls/MessageStack.axaml" />
 		<dialogHost:DialogHostStyles />
 	</Application.Styles>
 </Application>

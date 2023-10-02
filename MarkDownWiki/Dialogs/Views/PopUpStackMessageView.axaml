@@ -22,7 +22,7 @@
 					</Transitions>
 				</Setter>-->
 				<Style.Animations>
-					<Animation Duration="0:0:5">
+					<Animation Duration="{Binding Message.VisibleFor}">
 						<KeyFrame Cue="0%">
 							<Setter Property="(local:ProgressBarWorkaround.Value)" Value="100.0"/>
 						</KeyFrame>

@@ -11,7 +11,8 @@ namespace MarkDownWiki.Dialogs.Views;
 
 public partial class PopUpStackMessageView : UserControl
 {
-    private string? _dialogHostName;
+    //private string? _dialogHostName;
+    //private ItemsRepeater _parentRepeater;
 
     public PopUpStackMessageView()
     {
@@ -23,7 +24,7 @@ public partial class PopUpStackMessageView : UserControl
     {
         RemainingTimeProgressBar.AttachedToVisualTree -= OnAttachedToVisualTree;
 
-        _dialogHostName = this.FindAncestorOfType<DialogHost>()!.Identifier!;
+        //_dialogHostName = this.FindAncestorOfType<DialogHost>()!.Identifier!;
         RemainingTimeProgressBar.ValueChanged += OnValueChanged;
     }
 
@@ -33,7 +34,7 @@ public partial class PopUpStackMessageView : UserControl
         {
             e.Handled = true;
             RemainingTimeProgressBar.ValueChanged -= OnValueChanged;
-            DialogHost.GetDialogSession(_dialogHostName)!.Close();
+            //DialogHost.GetDialogSession(_dialogHostName)!.Close();
         }
     }
 

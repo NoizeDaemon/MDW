@@ -6,7 +6,10 @@
 			 xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
 			 xmlns:dialogPositioners="clr-namespace:DialogHostAvalonia.Positioners;assembly=DialogHost.Avalonia"
 			 xmlns:mcontrol="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+			 xmlns:mstyles="clr-namespace:Material.Styles;assembly=Material.Styles"
+			 xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
 			 xmlns:dialogModels="using:MarkDownWiki.Dialogs.Models"
+			 xmlns:dialogControls="using:MarkDownWiki.Dialogs.Controls"
 			 xmlns:conv="using:MarkDownWiki.Converters"
              xmlns:vm="using:MarkDownWiki.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -39,17 +42,41 @@
 				</Setter>
 			</Style>
 		</dialogHost:DialogHost.Styles>
-		<Panel>
+		
+		<!--MESSAGE_STACK-->
+		<dialogControls:MessageStack HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+									 IsMessageInsertedFirst="True" IsHistoryOpen="False">
+			<dialogControls:MessageStack.Styles>
+				<!--DEFINE MESSAGE_WRAPPER-->
+				<Style Selector="dialogControls|MessageStack">
+					<Setter Property="MessageWrapperTemplate">
+						<ControlTemplate>
+							<mcontrol:Card Name="PART_WrapperCard"
+										   Content="{TemplateBinding Content}"
+										   HorizontalAlignment="Right"
+										   Padding="0" />
+						</ControlTemplate>
+					</Setter>
+				</Style>
+				<Style Selector="mcontrol|Card#PART_WrapperCard">
+					<Setter Property="Theme" Value="{StaticResource MaterialCard}" />
+				</Style>
+				<Style Selector="StackPanel#PART_Stack">
+					<Setter Property="Margin" Value="10" />
+				</Style>
+			</dialogControls:MessageStack.Styles>
+
+			<dialogControls:MessageStack.MessageTemplates>
+				
+			</dialogControls:MessageStack.MessageTemplates>
+			
+			<!--CONTENT-->
 			<TransitioningContentControl Content="{Binding CurrentPage}">
 				<TransitioningContentControl.PageTransition>
 					<CrossFade Duration="0:00:01.500" />
 				</TransitioningContentControl.PageTransition>
 			</TransitioningContentControl>
-			<dialogHost:DialogHost Identifier="PopUpStackHost" OverlayBackground="Transparent" IsHitTestVisible="False">
-				<dialogHost:DialogHost.PopupPositioner>
-					<dialogPositioners:AlignmentDialogPopupPositioner HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"/>
-				</dialogHost:DialogHost.PopupPositioner>
-			</dialogHost:DialogHost>
-		</Panel> 		
+			
+		</dialogControls:MessageStack>
 	</dialogHost:DialogHost>
 </UserControl>

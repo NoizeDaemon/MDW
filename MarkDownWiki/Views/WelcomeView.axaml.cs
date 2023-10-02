@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.VisualTree;
 using DialogHostAvalonia;
 using MarkDownWiki.Dialogs;
+using MarkDownWiki.Dialogs.Controls;
 using MarkDownWiki.Dialogs.Models;
 using MarkDownWiki.Dialogs.ViewModels;
 using Material.Icons;
@@ -33,7 +34,11 @@ public partial class WelcomeView : UserControl
 
         await topLevel!.Clipboard!.SetTextAsync(brushname);
 
-        Dialog.ShowPopStackMessage($"'{brushname}' copied to clipboard!", MaterialIconKind.ContentCopy);
+        //Dialog.ShowPopStackMessage($"'{brushname}' copied to clipboard!", MaterialIconKind.ContentCopy);
+
+        var msg = new PopUpStackMessageViewModel(new PopUpStackMessage($"'{brushname}' copied to clipboard!", MaterialIconKind.ContentCopy));
+
+        MessageStack.AddNew(msg);
 
     }
 }
