@@ -10,6 +10,7 @@
 			 xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
 			 xmlns:dialogModels="using:MarkDownWiki.Dialogs.Models"
 			 xmlns:dialogControls="using:MarkDownWiki.Dialogs.Controls"
+			 xmlns:dev="using:MarkDownWiki.Dev"
 			 xmlns:conv="using:MarkDownWiki.Converters"
              xmlns:vm="using:MarkDownWiki.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -71,11 +72,12 @@
 			</dialogControls:MessageStack.MessageTemplates>
 			
 			<!--CONTENT-->
-			<TransitioningContentControl Content="{Binding CurrentPage}">
+			<!--<TransitioningContentControl Content="{Binding CurrentPage}">
 				<TransitioningContentControl.PageTransition>
 					<CrossFade Duration="0:00:01.500" />
 				</TransitioningContentControl.PageTransition>
-			</TransitioningContentControl>
+			</TransitioningContentControl>-->
+			<dev:TestControl />
 			
 		</dialogControls:MessageStack>
 	</dialogHost:DialogHost>

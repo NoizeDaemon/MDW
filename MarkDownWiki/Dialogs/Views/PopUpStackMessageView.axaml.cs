@@ -17,15 +17,13 @@ public partial class PopUpStackMessageView : UserControl
     public PopUpStackMessageView()
     {
         InitializeComponent();
-        RemainingTimeProgressBar.AttachedToVisualTree += OnAttachedToVisualTree;
+        //RemainingTimeProgressBar.AttachedToVisualTree += OnAttachedToVisualTree;
     }
 
     private void OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        RemainingTimeProgressBar.AttachedToVisualTree -= OnAttachedToVisualTree;
-
-        //_dialogHostName = this.FindAncestorOfType<DialogHost>()!.Identifier!;
-        RemainingTimeProgressBar.ValueChanged += OnValueChanged;
+        //RemainingTimeProgressBar.AttachedToVisualTree -= OnAttachedToVisualTree;
+        //RemainingTimeProgressBar.ValueChanged += OnValueChanged;
     }
 
     private void OnValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
@@ -33,8 +31,7 @@ public partial class PopUpStackMessageView : UserControl
         if (e.NewValue <= 0)
         {
             e.Handled = true;
-            RemainingTimeProgressBar.ValueChanged -= OnValueChanged;
-            //DialogHost.GetDialogSession(_dialogHostName)!.Close();
+            //RemainingTimeProgressBar.ValueChanged -= OnValueChanged;
         }
     }
 

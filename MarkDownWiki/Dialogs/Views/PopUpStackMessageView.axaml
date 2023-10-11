@@ -13,32 +13,14 @@
 			 x:DataType="dvm:PopUpStackMessageViewModel">
 	<Grid ColumnDefinitions="*, Auto, Auto">
 		<Grid.Styles>
-			<Style Selector="ProgressBar[IsVisible=True]">
-				<!--<Setter Property="Transitions">
-					<Transitions>
-						<DoubleTransition
-                              Property="(local:ProgressBarWorkaround.Value)"
-                              Duration="0:0:0.1"/>
-					</Transitions>
-				</Setter>-->
-				<Style.Animations>
-					<Animation Duration="{Binding Message.VisibleFor}">
-						<KeyFrame Cue="0%">
-							<Setter Property="(local:ProgressBarWorkaround.Value)" Value="100.0"/>
-						</KeyFrame>
-						<KeyFrame Cue="100%">
-							<Setter Property="(local:ProgressBarWorkaround.Value)" Value="0.0"/>
-						</KeyFrame>
-					</Animation>
-				</Style.Animations>
-			</Style>
+
 		</Grid.Styles>
 		<TextBlock Grid.Column="0" Margin="10" VerticalAlignment="Center"
 				   Classes="Body1" Text="{Binding Message.Text, FallbackValue=This is a message!}" />
 		<!--<icons:MaterialIcon Grid.Column="1" Kind="{Binding Icon, Converter={StaticResource IconConverter}, Mode=OneWay}" />-->
 		<icons:MaterialIcon Grid.Column="1" Width="30" Height="30" Margin="5"
 							Kind="{Binding Message.Icon, FallbackValue=InformationBoxOutline}" />
-		<ProgressBar Name="RemainingTimeProgressBar" Classes="no-transitions" Grid.Column="2" Orientation="Vertical" Background="{DynamicResource MaterialBackgroundBrush}">
-		</ProgressBar>
+		<!--<ProgressBar Name="RemainingTimeProgressBar" Classes="no-transitions" Grid.Column="2" Orientation="Vertical" Background="{DynamicResource MaterialBackgroundBrush}">
+		</ProgressBar>-->
 	</Grid>
 </UserControl>

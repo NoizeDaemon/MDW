@@ -60,6 +60,39 @@
 			</Border>
 		</ControlTemplate>
 	</Setter>
+	<Setter Property="MessageLayoutTemplate">
+		<ControlTemplate>
+			<DockPanel Name="PART_DockPanel">
+				<DockPanel.Styles>
+					<Style Selector="DockPanel#PART_DockPanel:not(:pointerover) ProgressBar#PART_ProgressBar">
+						<Style.Animations>
+							<!--{Binding $parent[controls:MessageStack].DefaultDisplayTime}-->
+							<Animation Duration="0:0:5" FillMode="Both">
+								<KeyFrame Cue="0%">
+									<Setter Property="Value" Value="100.0"/>
+								</KeyFrame>
+								<KeyFrame Cue="100%">
+									<Setter Property="Value" Value="0.0"/>
+								</KeyFrame>
+							</Animation>
+						</Style.Animations>
+					</Style>
+				</DockPanel.Styles>
+				<ContentPresenter Name="PART_MessagePresenter"
+								  Background="{TemplateBinding Background}"
+								  ContentTemplate="{TemplateBinding ContentTemplate}"
+								  Content="{TemplateBinding Content}"
+								  Padding="{TemplateBinding Padding}" />
+				<ProgressBar Name="PART_ProgressBar"
+							 DockPanel.Dock="{Binding $parent[controls:MessageStack].ProgressBarPosition}"
+							 IsVisible="{Binding $parent[controls:MessageStack].ShowProgressBar}"
+							 Orientation="{Binding $parent[controls:MessageStack].ProgressBarOrientation}"
+							 Classes="no-transitions"
+							 Background="Black" />
+			</DockPanel>
+
+		</ControlTemplate>
+	</Setter>
 	<Style Selector="^[IsHistoryOpen=True] /template/ Rectangle#PART_ContentCover">
 		<Setter Property="IsHitTestVisible" Value="True" />
 		<Setter Property="Opacity" Value="{Binding $parent[controls:MessageStack].OverlayBackgroundOpacity}" />

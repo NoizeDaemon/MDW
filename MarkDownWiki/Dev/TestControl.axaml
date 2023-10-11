@@ -7,5 +7,21 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
              x:Class="MarkDownWiki.Dev.TestControl"
 			 Margin="10">
-TEST
+	<UserControl.Styles>
+	</UserControl.Styles>
+	<Grid RowDefinitions="*,*">
+		<Button Content="Reset" HorizontalAlignment="Center" VerticalAlignment="Center"
+				Click="OnResetButtonClick" />
+		<mcontrol:Card Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+					   Padding="0"
+					   PointerEntered="OnPointerEnteredMessage"
+					   PointerExited="OnPointerExitedMessage">
+			<DockPanel>
+				<TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="10"
+						   Text="This is a message."  />
+				<ProgressBar DockPanel.Dock="Bottom" Name="ProgressBarToAnimate" Orientation="Horizontal"
+								Background="Black" Classes="no-transitions" />
+			</DockPanel>
+		</mcontrol:Card>
+	</Grid>
 </UserControl>

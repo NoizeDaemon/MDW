@@ -16,6 +16,9 @@ using Avalonia.Styling;
 using System.Diagnostics;
 using Avalonia.Markup.Xaml;
 using Avalonia.Layout;
+using Avalonia.VisualTree;
+using Avalonia.Interactivity;
+using Avalonia.Animation;
 
 namespace MarkDownWiki.Dialogs.Controls;
 
@@ -57,6 +60,40 @@ public class MessageStack : ContentControl
     {
         get => GetValue(IsHistoryOpenProperty);
         set => SetValue(IsHistoryOpenProperty, value);
+    }
+
+
+    public static readonly StyledProperty<bool> ShowProgressBarProperty = 
+    AvaloniaProperty.Register<MessageStack, bool>("ShowProgressBar", true);
+
+    public bool ShowProgressBar
+    {
+        get => GetValue(ShowProgressBarProperty);
+        set => SetValue(ShowProgressBarProperty, value);
+    }
+
+
+    public static readonly StyledProperty<Dock> ProgressBarPositionProperty =
+    AvaloniaProperty.Register<MessageStack, Dock>("ShowProgressBar", Dock.Right);
+
+    public Dock ProgressBarPosition
+    {
+        get => GetValue(ProgressBarPositionProperty);
+        set => SetValue(ProgressBarPositionProperty, value);
+    }
+
+    public Orientation ProgressBarOrientation
+    {
+        get => ProgressBarPosition switch { Dock.Left or Dock.Right => Orientation.Vertical, _ => Orientation.Horizontal };
+    }
+
+    public static readonly StyledProperty<TimeSpan> DefaultDisplayTimeProperty =
+    AvaloniaProperty.Register<MessageStack, TimeSpan>("DefaultDisplayTime", TimeSpan.FromSeconds(5));
+
+    public TimeSpan DefaultDisplayTime
+    {
+        get => GetValue(DefaultDisplayTimeProperty);
+        set => SetValue(DefaultDisplayTimeProperty, value);
     }
 
 
@@ -109,13 +146,22 @@ public class MessageStack : ContentControl
     }
 
 
-    public static readonly StyledProperty<IControlTemplate?> MessageWrapperTemplateProperty =
+    public static readonly StyledProperty<IControlTemplate> MessageWrapperTemplateProperty =
     AvaloniaProperty.Register<MessageStack, IControlTemplate>("MessageWrapperTemplate");
 
-    public IControlTemplate? MessageWrapperTemplate
+    public IControlTemplate MessageWrapperTemplate
     {
         get => GetValue(MessageWrapperTemplateProperty);
         set => SetValue(MessageWrapperTemplateProperty, value);
+    }
+
+    public static readonly StyledProperty<IControlTemplate> MessageLayoutTemplateProperty =
+    AvaloniaProperty.Register<MessageStack, IControlTemplate>("MessageLayoutTemplate");
+
+    public IControlTemplate MessageLayoutTemplate
+    {
+        get => GetValue(MessageLayoutTemplateProperty);
+        set => SetValue(MessageLayoutTemplateProperty, value);
     }
 
     // *** INSTANCE HANDLING ***
@@ -212,24 +258,47 @@ public class MessageStack : ContentControl
 
     private void Attach(Control newMessage, bool useWrapper)
     {
-        Control finalAttachment;
+        var layoutedMessage = new ContentControl()
+        {
+            Template = MessageLayoutTemplate,
+            Name = "PART_MessageLayout",
+            Content = newMessage,
+            ClipToBounds = false
+        };
 
-        if (useWrapper)
+        Control finalAttachment = new ContentControl()
         {
-            finalAttachment = new ContentControl()
-            {
-                Template = MessageWrapperTemplate,
-                Name = "PART_Wrapper",
-                Content = newMessage,
-                ClipToBounds = false
-            };
-        }
-        else
-        {
-            finalAttachment = newMessage;
-        }
+            Template = (useWrapper) ? MessageWrapperTemplate : null,
+            Name = "Message",
+            Content = layoutedMessage,
+            ClipToBounds = false
+        };
+
+        finalAttachment.Loaded += OnMessageLoaded;
 
         if (IsMessageInsertedFirst) _stack.Children.Insert(0, finalAttachment);
         else _stack.Children.Add(finalAttachment);
+    }
+
+    private void OnMessageLoaded(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Control message) return;
+
+        e.Handled = true;
+        message.FindDescendantOfType<ProgressBar>()!.ValueChanged += OnMessageTimeChanged;
+    }
+
+    private void OnMessageTimeChanged(object? sender, RangeBaseValueChangedEventArgs e)
+    {
+        if (sender is not ProgressBar progressBar) return;
+
+        if (e.NewValue <= 0)
+        {
+            e.Handled = true;
+            progressBar.ValueChanged -= OnMessageTimeChanged;
+
+            var message = _stack.Children.Single(c => c.IsVisualAncestorOf(progressBar));
+            _stack.Children.Remove(message);
+        }
     }
 }
